@@ -7,32 +7,37 @@ import EmployeeSetComponent from './myComponents/employeeCardsComponents/Employe
 import AccordinShow from './myComponents/accordinComponent/AccordinShow';
 import Pagination from './myComponents/paginationComponent/Pagination';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-import Home from './myComponents/routingTrialComponents/Home';
-import Index from './myComponents/routingTrialComponents/Index';
-
-
-
+import Home from './myComponents/employeeCardsComponents/routing/Home';
+import PageNotFound from './myComponents/employeeCardsComponents/routing/PageNotFound';
+import Details from './myComponents/employeeCardsComponents/routing/Details';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    {/*<BrowserRouter>
     <div>
       <ul>
         <li><Link to="/home">Home</Link></li>
-        <li><Link to="/index">Index</Link></li>
+        <li><Link to="/index">Index</Link></li> //Link cannot be given outside of BrowserRouter 
       </ul>
     </div>
     <Routes>
       <Route exact path='/home' element={<Home/>}></Route>
       <Route exact path='/index' element={<Index/>}></Route>
-    </Routes>
+    </Routes>// Routes are necessary to provide the link path,must be provided inside the parent component inside BrowserRouter 
 
+    </BrowserRouter>  //BrowserRouter must be inside the parent component*/}
+
+    <BrowserRouter>
+      <Routes>
+      <Route exact path='/' element={<EmployeeSetComponent />}></Route>
+        <Route exact path='/home' element={<Home />}></Route>
+        <Route exact path='/details/:name' element={<Details/>}></Route>{/*here only /:name is enough, the /details is given only for 
+                                                                        understanding*/}
+        <Route exact path='*' element={<PageNotFound/>}></Route>
+      </Routes>
     </BrowserRouter>
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
