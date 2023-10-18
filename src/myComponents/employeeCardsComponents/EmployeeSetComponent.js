@@ -10,7 +10,7 @@ export default function EmployeeSetComponent() {
 
   const[mainarr,setMainArr]=useState([]);
   const [empData, setEmpData] = useState(mainarr);
-
+  const[pageLength,setPageLength]=useState();
 
   // getting data from json document
   //////////////////////////////////////
@@ -23,9 +23,11 @@ export default function EmployeeSetComponent() {
     console.log(empData);
   }, [])
 
-  //this useEffect is used to call the setEmpData() as soon as the mainarr is updated
+  //this useEffect is used to call the setEmpData() as soon as the mainarr is updated as the previous useEffect that 
+  //called getData() is a callback function
   useEffect(() => {
     setEmpData(mainarr);
+    setPageLength(Math.ceil(mainarr.length/5));
   }, [mainarr])
   
   //////////////////////////////////////
@@ -63,7 +65,8 @@ export default function EmployeeSetComponent() {
   // }
 
   
-  const pageLength = Math.ceil(mainarr.length / 5);
+  
+  //const pageLength = Math.ceil(empData.length / 5);
   // const pageArr=[];
   // for(let i=1;i<=pageLength;i++)
   // {
@@ -73,12 +76,14 @@ export default function EmployeeSetComponent() {
   //console.log("Hi");// the parent component is re-rendered when the params to onPageChange() is passed from the child component
 
   //The function below is used to filter the objects and limit the size of empData to 5
-  function onPageChange(currentIndex = 1, role) {
-    if (role) {
+  function onPageChange(currentIndex = 1) {
+    let role=document.querySelector("#dropDown").value;
+    if (role && role!=="default") {
 
       console.log("Role changed", currentIndex)
       let empArray = [];
-      empArray = mainarr.filter(function (el) { return el.role == role }).slice(((currentIndex - 1) * 5), (currentIndex * 5))
+      setPageLength(Math.ceil(mainarr.filter(function (el) { return el.role == role }).length/5));
+      empArray = mainarr.filter(function (el) { return el.role == role }).slice((currentIndex-1)*5,currentIndex*5)
       //empArray = mainarr.filter(function (el) { return el.role == role })
       setEmpData(empArray)
     }
@@ -86,7 +91,8 @@ export default function EmployeeSetComponent() {
       console.log(currentIndex)
 
       let empArray = [];
-      empArray = mainarr.slice(((currentIndex - 1) * 5), (currentIndex * 5))
+      setPageLength(Math.ceil(mainarr.length/5));
+      empArray = mainarr.slice((currentIndex-1)*5,currentIndex*5)
       //console.log(empArray)
       setEmpData(empArray)
       return empArray
@@ -94,9 +100,8 @@ export default function EmployeeSetComponent() {
 
 
   }
-  function onRoleChange(event) {
-    let role = event.target.value;
-    onPageChange(1, role)
+  function onRoleChange() {
+    onPageChange(1)
   }
   //var arr=onPageChange()//we usually do this to get data from API
 
