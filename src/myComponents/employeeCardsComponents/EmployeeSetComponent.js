@@ -4,14 +4,32 @@ import EmployeeShowComponent from './EmployeeShowComponent'
 import { useEffect } from 'react'
 import Pagination from '../paginationComponent/Pagination';
 import '../paginationComponent/Pagination.css';
-import { BrowserRouter, Link, NavLink, Route, Routes } from 'react-router-dom';
-import Home from './routing/Home';
-import PageNotFound from './routing/PageNotFound';
-import mainarr from '../employeeCardsComponents/EmployeeDataComponent';
+//import mainarr from '../employeeCardsComponents/EmployeeDataComponent';
 export default function EmployeeSetComponent() {
+  
 
+  const[mainarr,setMainArr]=useState([]);
   const [empData, setEmpData] = useState(mainarr);
 
+
+  // getting data from json document
+  //////////////////////////////////////
+  const getData=()=>{
+    fetch('test.json').then((response)=>{return response.json();}).then((data)=>{console.log(data);setMainArr(data);})
+  }
+  //this useEffect is used to load the data from the JSON document
+  useEffect(() => {
+    getData();
+    console.log(empData);
+  }, [])
+
+  //this useEffect is used to call the setEmpData() as soon as the mainarr is updated
+  useEffect(() => {
+    setEmpData(mainarr);
+  }, [mainarr])
+  
+  //////////////////////////////////////
+  
   //const [pageNo, setPageNo] = useState(1)
 
   // useEffect(() => {//called whenever empData is modified
@@ -52,7 +70,7 @@ export default function EmployeeSetComponent() {
   //   pageArr.push(i)
   // }
 
-  console.log("Hi");// the parent component is re-rendered when the params to onPageChange() is passed from the child component
+  //console.log("Hi");// the parent component is re-rendered when the params to onPageChange() is passed from the child component
 
   //The function below is used to filter the objects and limit the size of empData to 5
   function onPageChange(currentIndex = 1, role) {
@@ -61,6 +79,7 @@ export default function EmployeeSetComponent() {
       console.log("Role changed", currentIndex)
       let empArray = [];
       empArray = mainarr.filter(function (el) { return el.role == role }).slice(((currentIndex - 1) * 5), (currentIndex * 5))
+      //empArray = mainarr.filter(function (el) { return el.role == role })
       setEmpData(empArray)
     }
     else {
@@ -97,7 +116,8 @@ export default function EmployeeSetComponent() {
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
         {
-          empData.map((vals) => {
+          empData.slice(0,5).map((vals) => {
+            console.log(empData);
             return (
               
                 <EmployeeShowComponent src={vals.src} name={vals.name} role={vals.role} />

@@ -12,6 +12,8 @@ import PageNotFound from './myComponents/employeeCardsComponents/routing/PageNot
 import Details from './myComponents/employeeCardsComponents/routing/Details';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+
 root.render(
   <React.StrictMode>
     {/*<BrowserRouter>
@@ -32,7 +34,9 @@ root.render(
       <Routes>
       <Route exact path='/' element={<EmployeeSetComponent />}></Route>
         <Route exact path='/home' element={<Home />}></Route>
-        <Route exact path='/details/:name' element={<Details/>}></Route>{/*here only /:name is enough, the /details is given only for 
+        <Route exact path='/details/:name' element={<Details/>}></Route>{/*here /:name--> you can only use name as const variable 
+                                                                        in useparams(); you , 
+                                                                        the /details is given only for 
                                                                         understanding*/}
         <Route exact path='*' element={<PageNotFound/>}></Route>
       </Routes>
