@@ -3,44 +3,38 @@ import { useParams } from 'react-router-dom'
 //import mainarr from '../EmployeeDataComponent';
 
 export default function Details() {
-  const { name } = useParams();
+  const { name  } = useParams();
   const [dataArr, setDataArr] = useState([]);
-  const [empImg, setEmpImg] = useState();
-  const [empRole, setEmpRole] = useState();
-  const [empDetails, setEmpDetails] = useState();
-
-  // const getData = () => {
-  //   fetch('http://localhost:3000/test.json')
-  //     .then((response) => {
-  //       //console.log(response.json());// gives a promise that the states that the promise is fulfilled and the jsondata is also there
-  //       return response.json();
-  //     })
-  //     .then((data) => { console.log(data); setDataArr(data) })
-  //     .catch((error) => { console.error(error) })
-  // }
-//async function  getaa(){}
-  const getData=async()=>{//async- lets the other code lines execute without stopping the flow
-    try{//try is used because it's an async function
-      const response= await fetch('http://localhost:3000/test.json')//await-stops the execution flow until it's function is complete
-      const data= await response.json();
-      console.log(data);
-      setDataArr(data);
-    }
-    catch(err){
-      console.error(err);
-    }
-
-  }
+  const [empDetails, setEmpDetails] = useState({});//we're storing an object here so use curly braces inside the useState({})
+  const{src,role,details}=empDetails//Ask sir on how this destructuring works, as normal assignment usually gave an error
   useEffect(() => {
     getData();
   }, [])
+
+  //async- lets the other code lines execute without stopping the flow, continues the flow after getting th
+  const getData = async () => {
+    //try is used because it's an async function
+    try {
+      //await-stops the execution flow until it's function is complete
+      const response = await fetch('http://localhost:3000/test.json')
+      const data = await response.json();
+      console.log(data);
+      setDataArr(data);
+    }
+    catch (err) {
+      console.error(err);
+    }
+  }
+
   useEffect(() => {
     for (let i = 0; i < dataArr.length; i++) {
 
       if (dataArr[i].name == name) {
-        setEmpImg(dataArr[i].src)
-        setEmpRole(dataArr[i].role);
-        setEmpDetails(dataArr[i].details);
+        //use destructuring here
+        //re-rendering is not triggered when you set as variables here ,only state invokes re-rendering
+        console.log(dataArr[i]);
+        setEmpDetails(dataArr[i]);
+        
       }
 
     }
@@ -48,10 +42,10 @@ export default function Details() {
 
   return (
     <>
-      <div><img src={empImg} style={{ width: 200, height: 200, borderRadius: 200 / 2 }} /></div>
+      <div><img src={src} style={{ width: 200, height: 200, borderRadius: 200 / 2 }} /></div>
       <div>Name:{name}</div>
-      <div>Role:{empRole}</div>
-      <div>Details:{empDetails}</div>
+      <div>Role:{role}</div>
+      <div>Details:{details}</div>
     </>
   )
 }
