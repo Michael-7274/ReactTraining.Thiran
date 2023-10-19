@@ -9,7 +9,7 @@ export default function EmployeeSetComponent() {
   
 
   const[mainarr,setMainArr]=useState([]);
-  const [empData, setEmpData] = useState(mainarr);
+  const[empData, setEmpData] = useState(mainarr);
   const[pageLength,setPageLength]=useState();
 
   // getting data from json document

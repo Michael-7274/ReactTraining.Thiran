@@ -11,7 +11,7 @@ export default function Details() {
     getData();
   }, [])
 
-  //async- lets the other code lines execute without stopping the flow, continues the flow after getting th
+  //async- lets the other code lines execute without stopping the flow, continues the flow after getting the result
   const getData = async () => {
     //try is used because it's an async function
     try {
