@@ -23,14 +23,14 @@ export default function ParentBoard() {
                     setResult('X wins')
                     setTimeout(function(){
                         window.location.reload(false);
-                    },5000)
+                    },10000)
 
                 }
                 else{
                     setResult('o wins')
                     setTimeout(function(){
                         window.location.reload(false);
-                    },5000)
+                    },10000)
 
                 }
                 break;
@@ -39,7 +39,7 @@ export default function ParentBoard() {
                 setResult("Draw")
                 setTimeout(function(){
                     window.location.reload(false);
-                },5000)
+                },10000)
             }
         }
     }
@@ -58,9 +58,9 @@ export default function ParentBoard() {
             <div style={{ display: "flex", justifyContent: "center" }}>
                 <h1>TIC-TAC-TOE</h1>
             </div>
-            {/* <div style={{ display: "flex", justifyContent: "center" }}>
-                {(turnCount==9)?<h1>Match over</h1>:((turnCount%2==0)?<h1>X Turn</h1>:<h1>O Turn</h1>)}
-            </div> */}
+            <div style={{ display: "flex", justifyContent: "center" }}>
+                {((turnCount==9)||(result!=''))?<h1>Match over</h1>:((turnCount%2==0)?<h1>X Turn</h1>:<h1>O Turn</h1>)}
+            </div>
             <div style={{ display: "flex", justifyContent: "center" }}>
                 <div className="button-container">
                     {buttons}
