@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import './style.css'
-export default function ChildButton({ index, turnNo, updateTurn ,setArrayValues}) {
-    const [text, setText] = useState(index);
+export default function ChildButton({ index, turnNo, updateTurn ,setArrayValues,result}) {
+    const [text, setText] = useState();
     const [clicked, setClicked] = useState(false);
     function changingTurn() {
-        if (!clicked) {
+        if (!clicked && result=='') {
             if ((turnNo % 2) == 0) {
                 setText('x');
                 updateTurn(turnNo + 1);

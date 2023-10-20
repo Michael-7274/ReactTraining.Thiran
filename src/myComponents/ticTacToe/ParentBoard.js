@@ -5,24 +5,41 @@ export default function ParentBoard() {
     const [turnCount,increaseTurnCount]=useState(0);
     const buttons = [];
     const [result,setResult]=useState('');
-    const [boxValues,setBoxValues]=useState(['1','2','3','4','5','6','7','8','9']);
+    const [boxValues,setBoxValues]=useState(['0','1','2','3','4','5','6','7','8']);
     const winConditions=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
     useEffect(() => {
         console.log(turnCount);
         console.log(boxValues);
         setWinner();
     }, [turnCount,boxValues])
+
     function setWinner(){
         for(const condition of winConditions){
             const [a,b,c]=condition;
-            console.log(a,b,c);
-            if(boxValues[a]===boxValues[b]===boxValues[c]){
+            if((boxValues[a]===boxValues[b])&&(boxValues[b]===boxValues[c]))
+            {
+                console.log("executed");
                 if((turnCount%2)==1){
                     setResult('X wins')
+                    setTimeout(function(){
+                        window.location.reload(false);
+                    },5000)
+
                 }
                 else{
                     setResult('o wins')
+                    setTimeout(function(){
+                        window.location.reload(false);
+                    },5000)
+
                 }
+                break;
+            }
+            else if(turnCount==9){
+                setResult("Draw")
+                setTimeout(function(){
+                    window.location.reload(false);
+                },5000)
             }
         }
     }
@@ -33,7 +50,7 @@ export default function ParentBoard() {
         setBoxValues(tempArr)
     }
     for (let i = 0; i <9; i++) {
-        buttons.push(<ChildButton index={i} turnNo={turnCount} updateTurn={increaseTurnCount} setArrayValues={setBoxArray}/>);
+        buttons.push(<ChildButton index={i} turnNo={turnCount} updateTurn={increaseTurnCount} setArrayValues={setBoxArray} result={result}/>);
     }
 
     return (
@@ -41,6 +58,9 @@ export default function ParentBoard() {
             <div style={{ display: "flex", justifyContent: "center" }}>
                 <h1>TIC-TAC-TOE</h1>
             </div>
+            {/* <div style={{ display: "flex", justifyContent: "center" }}>
+                {(turnCount==9)?<h1>Match over</h1>:((turnCount%2==0)?<h1>X Turn</h1>:<h1>O Turn</h1>)}
+            </div> */}
             <div style={{ display: "flex", justifyContent: "center" }}>
                 <div className="button-container">
                     {buttons}
