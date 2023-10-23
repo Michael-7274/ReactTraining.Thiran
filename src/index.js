@@ -6,18 +6,20 @@ import reportWebVitals from './reportWebVitals';
 import EmployeeSetComponent from './myComponents/employeeCardsComponents/EmployeeSetComponent';
 import AccordinShow from './myComponents/accordinComponent/AccordinShow';
 import Pagination from './myComponents/paginationComponent/Pagination';
-
-
-
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import Home from './myComponents/employeeCardsComponents/routing/Home';
+import PageNotFound from './myComponents/employeeCardsComponents/routing/PageNotFound';
+import Details from './myComponents/employeeCardsComponents/routing/Details';
+import Accordin from './myComponents/liftingTheStateUp/Accordin';
+import ParentBoard from './myComponents/ticTacToe/ParentBoard';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+
 root.render(
   <React.StrictMode>
-    <EmployeeSetComponent/>
+    <ParentBoard/>
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
