@@ -4,10 +4,15 @@
     overflow-y: auto;
 }
 
-.button-container  button {
+.button-container button {
     width: 100px;
     height: 100px;
     float: left;
-    background: lightgray;   
+    background: lightgray;
     margin: 15px;
+}
+
+.centerdiv {
+    display: flex;
+    justify-content: center;
 }

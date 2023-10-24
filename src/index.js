@@ -12,13 +12,15 @@ import PageNotFound from './myComponents/employeeCardsComponents/routing/PageNot
 import Details from './myComponents/employeeCardsComponents/routing/Details';
 import Accordin from './myComponents/liftingTheStateUp/Accordin';
 import ParentBoard from './myComponents/ticTacToe/ParentBoard';
+import TicTacToe from './myComponents/singleComponentTicTacToe/TicTacToe';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 root.render(
   <React.StrictMode>
-    <ParentBoard/>
+    <ParentBoard />
+    {/* <TicTacToe/> */}
   </React.StrictMode>
 );
 
