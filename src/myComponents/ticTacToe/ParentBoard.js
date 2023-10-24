@@ -76,9 +76,8 @@ export default function ParentBoard() {
             <div className='centerdiv'>
                 <h1>TIC-TAC-TOE</h1>
             </div>
-            <div className='centerdiv'>
-                {(boxValues.indexOf('')===-1 || (result !== '')) ? <h1>Match over</h1> : ((turn === 'X') ?
-                    <h1>X Turn</h1> : <h1>O Turn</h1>)}
+            <div className="centerdiv">
+                <h1>{result}</h1>
             </div>
             <div className='centerdiv'>
                 <div className="button-container">
@@ -87,8 +86,9 @@ export default function ParentBoard() {
                     }
                 </div>
             </div>
-            <div className="centerdiv">
-                <h1>{result}</h1>
+            <div className='centerdiv'>
+                {(boxValues.indexOf('')===-1 || (result !== '')) ? <h1>Match over</h1> : ((turn === 'X') ?
+                    <h1>X Turn</h1> : <h1>O Turn</h1>)}
             </div>
         </>
     )
